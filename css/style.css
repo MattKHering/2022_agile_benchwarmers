@@ -73,4 +73,5 @@ a:hover {
     background-repeat: no-repeat;
     background-position: center;
     min-width: 400px;
+		text-align: center;
 }
