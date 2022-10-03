@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body onload="onload()">
     <main id="hero">
         <header>
             <h2>HydroMinder</h2>
@@ -18,9 +18,11 @@
             The app that encourages hydration<br>
         </p>
 			
-			  <p>
+		<p>
             Please select a time interval<br>
         </p>
+
+        <p>Water drank today: <span id="waterDrankAmount"></span></p>
 
 
         <br><br>
