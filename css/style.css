@@ -1,77 +1,72 @@
 header {
     color: white;
     text-align: center;
-    background-color: #ADD8E6;
-}
-
-body {
+    background-color: #23addb;
+  }
+  
+  body {
     color: white;
     background-color: gray;
-    font-family: "verdana", "arial", sans-serif;
-
-}
-
-main {
+    font-family: verdana, arial, sans-serif;
+  }
+  
+  main {
     padding: 20px;
     display: block;
-    background-color: #ADD8E6;
+    background-color: #23addb;
     margin-left: 175px;
     margin-right: 175px;
     position: relative;
-
-}
-
-#colorSquare {
+  }
+  
+  #color-square {
     min-width: 100px;
     min-height: 100px;
-
-}
-
-h1 {
+  }
+  
+  h1 {
     color: white;
     height: 100px;
     margin: 0;
-    font-family: "georgia", "times new roman", serif;
-}
-
-h2 {
-    font-family: "georgia", "times new roman", serif;
-}
-
-h3 {
-    background-color: #ADD8E6;
+    font-family: georgia, times-new-roman, serif;
+  }
+  
+  h2 {
+    font-family: georgia, times-new-roman, serif;
+  }
+  
+  h3 {
+    background-color: #23addb;
     text-transform: uppercase;
-}
-
-footer {
+  }
+  
+  footer {
     color: white;
-    background-color: #ADD8E6;
+    background-color: #23addb;
     text-align: center;
-    font-size: .70em;
+    font-size: 0.7em;
     padding: 10px;
     padding-left: 50px;
     padding-right: 50px;
     bottom: 0;
     align-content: center;
-}
-
-
-a {
-    color: aqua
-}
-
-a:hover {
+  }
+  
+  a {
+    color: rgb(140 0 255);
+  }
+  
+  a:hover {
     color: white;
-}
-
-
-
-#hero {
+  }
+  
+  #hero {
     height: auto;
-    color: #F5F5DC;
+    color: #f5f5dc;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
     min-width: 400px;
-		text-align: center;
-}
+    text-align: center;
+  }
+  

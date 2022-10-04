@@ -1,3 +1,4 @@
+/* jshint curly: true, esversion: 6, eqeqeq: true, latedef: true, laxbreak: true */
 const waterDrankLabel = document.getElementById("waterDrankAmount");
 
 // Set default units
@@ -6,19 +7,13 @@ const defaultUnits = "oz";
 // Set default goal
 const defaultGoal = 150;
 
-onload = function() {
-    updateWaterDrank();
-}
+// Placeholder function for getting the selected units
+function getUnits() {
 
-// Updates the "Water drank today:" label
-function updateWaterDrank() {
-    var drank = getWaterDrank();
-    var goal = getGoalAmount();
-    var units = getUnits();
-
-    var output = drank + units + " / " + goal + units;
-
-    waterDrankLabel.innerHTML = output;
+    // TODO if statement to see if units were changed
+    var units = defaultUnits;
+    
+    return units;
 }
 
 // Placeholder function to get amount of water drank
@@ -28,7 +23,7 @@ function getWaterDrank() {
     var amount = 100;
 
     // Check if units were changed
-    if (getUnits() != "oz") {
+    if (getUnits() !== "oz") {
         
         // TODO unit conversion function
 
@@ -44,7 +39,7 @@ function getGoalAmount() {
     var amount = defaultGoal;
 
     // Check if units were changed
-    if (getUnits() != "oz") {
+    if (getUnits() !== "oz") {
         
         // TODO unit conversion function
 
@@ -53,17 +48,20 @@ function getGoalAmount() {
     return amount;
 }
 
-// Placeholder function for getting the selected units
-function getUnits() {
+// Updates the "Water drank today:" label
+function updateWaterDrank() {
+    var drank = getWaterDrank();
+    var goal = getGoalAmount();
+    var units = getUnits();
 
-    // TODO if statement to see if units were changed
-    var units = defaultUnits;
-    
-    return units;
+    var output = drank + units + " / " + goal + units;
+
+    waterDrankLabel.innerHTML = output;
 }
 
-
-
+onload = function() {
+    updateWaterDrank();
+};
 
 function alarm() {
     
