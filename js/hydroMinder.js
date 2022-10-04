@@ -61,3 +61,24 @@ function getUnits() {
     
     return units;
 }
+
+
+
+
+function alarm() {
+    
+    window.location.href = "wateralarm.html";
+
+}
+
+function waterConfirm(didDrinkWater) {
+    if (!didDrinkWater) {
+        alert("Please drink some water!");
+    } else {
+        alert("Good Job, stay hydrated!!!");
+        
+        //logic to add to drinking totals entered here.
+        
+        window.location.href = "index.html";
+    }
+}
