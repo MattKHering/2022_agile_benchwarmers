@@ -4,11 +4,19 @@
 <head>
 	<title>HydroMinder</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="css/style.css">
+	<link id="myCSS" href="css/style.css" type="text/css" rel="stylesheet">
+	<!-- <link id="theme" href="css/style.css" type="text/css" rel="stylesheet"> -->
+	<!-- <link rel="stylesheet" href="css/style.css"> -->
 </head>
 
 <body onload="onload()">
 	<main id="hero">
+
+		<div id="settings">			
+			<label class="switch">
+			<input type="checkbox">
+			<span class="slider round"></span>
+		  </label></div>
 		<header>
 			<h2>HydroMinder</h2>
 		</header>
@@ -21,7 +29,6 @@
         <button onclick="alarm()">Test Alarm</button>
 
 		<p>Water drank today: <span id="waterDrankAmount"></span></p>
-
 
 		<br><br>
 		<nav>

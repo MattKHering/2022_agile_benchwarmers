@@ -80,3 +80,19 @@ function waterConfirm(didDrinkWater) {
         window.location.href = "index.html";
     }
 }
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    var checkbox = document.querySelector('input[type="checkbox"]');
+  
+    checkbox.addEventListener('change', function () {
+      if (checkbox.checked) {
+        // Do this when checked
+        document.getElementById('myCSS').href = 'css/night.css';
+        console.log('Checked');
+      } else {
+        // When not checked/unchecked
+        document.getElementById('myCSS').href = 'css/style.css';
+      }
+    });
+  });
