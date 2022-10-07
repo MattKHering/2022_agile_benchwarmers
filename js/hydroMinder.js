@@ -32,12 +32,15 @@ function getWaterDrank() {
     return amount;
 }
 
+
 // Placeholder function to get amount of water user wants to drink
 function getGoalAmount() {
-
-    // TODO get amount of water user sets as goal
+    
+    //applys default before input changes value
     var amount = defaultGoal;
-
+ 
+     amount = document.getElementById("setGoal").value
+     
     // Check if units were changed
     if (getUnits() !== "oz") {
         
@@ -47,6 +50,7 @@ function getGoalAmount() {
 
     return amount;
 }
+
 
 // Updates the "Water drank today:" label
 function updateWaterDrank() {
