@@ -16,6 +16,15 @@ function getUnits() {
     return units;
 }
 
+function getGoal() {
+
+    // TODO if statement to see if units were changed
+    var goal = defaultGoal;
+    
+    return goal;
+}
+
+
 // Placeholder function to get amount of water drank
 function getWaterDrank() {
 
@@ -35,11 +44,9 @@ function getWaterDrank() {
 
 // Placeholder function to get amount of water user wants to drink
 function getGoalAmount() {
-    
-    //applys default before input changes value
-    var amount = defaultGoal;
+  
  
-     amount = document.getElementById("setGoal").value
+     goal = document.getElementById("setGoal").value
      
     // Check if units were changed
     if (getUnits() !== "oz") {
@@ -48,14 +55,13 @@ function getGoalAmount() {
 
     }
 
-    return amount;
+    return goal;
 }
 
-
-// Updates the "Water drank today:" label
-function updateWaterDrank() {
-    var drank = getWaterDrank();
-    var goal = getGoalAmount();
+// Set goal with defaults
+function setGoalDefault() {
+    var drank = 0;
+    goal = getGoal();
     var units = getUnits();
 
     var output = drank + units + " / " + goal + units;
@@ -63,8 +69,34 @@ function updateWaterDrank() {
     waterDrankLabel.innerHTML = output;
 }
 
+
+// Updates the "Water drank today:" label
+function updateWaterDrank() {
+    var drank = getWaterDrank();
+    goal = getGoalAmount();
+    var units = getUnits();
+    getGoal()
+
+    var output = drank + units + " / " + goal + units;
+
+    waterDrankLabel.innerHTML = output;
+  
+    checkGoal(drank,goal);
+}
+
+//congradulate the user if they drank the goal amount of water
+function checkGoal(drank,goal) {
+  if (drank >= goal){
+        alert("You drank your goal! Your total is going to reset");
+    setGoalDefault();
+    
+//    window.location.href = "index.html";
+
+      }
+}
+
 onload = function() {
-    updateWaterDrank();
+    setGoalDefault()
 };
 
 function alarm() {
