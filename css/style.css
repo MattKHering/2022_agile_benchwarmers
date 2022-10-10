@@ -17,6 +17,7 @@ main {
   margin-left: 175px;
   margin-right: 175px;
   position: relative;
+  border-radius: 34px;
 }
 
 #color-square {
