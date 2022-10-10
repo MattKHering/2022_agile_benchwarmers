@@ -14,9 +14,10 @@
 
 		<div id="settings">			
 			<label class="switch">
-			<input type="checkbox">
-			<span class="slider round"></span>
-		  </label></div>
+				<input type="checkbox">
+				<span class="slider round"></span>
+		  	</label>
+		</div>
 		<header>
 			<h2>HydroMinder</h2>
 		</header>
@@ -26,14 +27,21 @@
 
 		<p>Please select a time interval<br></p>
         
-        <button onclick="alarm()">Test Alarm</button><br>
+        <button onclick="alarm()">Test Alarm</button><br><br>
 		
 		
 
 		
 		
-		<br><input id="setGoal" type="number" value="150"/><br> 
-		<br><button type="button" onclick="updateWaterDrank()">Set Goal</button>
+		<input id="setGoal" type="number" value="125"/>
+		<select name="units" id="unitsSelect">
+			<option value="fluidOunces">fl oz</option>
+			<option value="cups">cups</option>
+			<option value="gallons">gal</option>
+			<option value="milliliters">mL</option>
+			<option value="liters">L</option>
+		</select><br><br>	
+		<button type="button" onclick="updateWaterDrank()">Set Goal</button>
 
 
 		<p>Water drank today: <span id="waterDrankAmount"></span></p>

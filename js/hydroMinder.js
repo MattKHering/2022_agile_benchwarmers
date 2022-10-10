@@ -1,11 +1,8 @@
 /* jshint curly: true, esversion: 6, eqeqeq: true, latedef: true, laxbreak: true */
+const unitsDropdown = document.getElementById("unitsSelect");
+const waterDrankLabel = document.getElementById("waterDrankAmount");
 
-// Set default values
-const defaultWaterDrank = 0;
-const defaultUnits = "fl oz";
-const defaultGoal = 125;
-
-const units = {
+const unitRates = {
     fluidOunces: {
         rate: 1,
         string: "fl oz"
@@ -28,54 +25,80 @@ const units = {
     }
 };
 
-// Get the units set by the user
-function getUnits() {
+// Set default values
+const defaultWaterDrank = 0;
+const defaultGoal = 125;
+const defaultUnits = unitsDropdown[0].value;
 
-    // TODO if statement to see if units were changed
-    return defaultUnits;
+// Initialize variables
+var previousUnits = "";
+var amountDrank = 0;
+
+// Get the units from the select box
+function getUnits() {
+    return unitsDropdown.options[unitsDropdown.selectedIndex].value;
 }
 
+// Get the units string value
+function unitsToString(units) {
+    return unitRates[units].string;
+}
+
+// Updates the amount of water drank
+function setWaterDrank(newAmount) {
+    amountDrank = newAmount;
+}
 
 // Get the amount of water drank by the user
 function getWaterDrank() {
-
-    // TODO get amount of water drank
-
-    // TODO Check if units were changed
-
-    return defaultWaterDrank;
+    return amountDrank;
 }
-
 
 // Get the goal amount set by the user
 function getGoalAmount() {
-  
-    var goal = document.getElementById("setGoal").value;
-     
-    // TODO Check if units were changed
+    return document.getElementById("setGoal").value;
+}
 
-    return goal;
+// Convert the units for the amount drank and goal
+function convertUnits(amount, convertFrom, convertTo) {
+    
+    // Store the previous units
+    previousUnits = convertFrom;
+
+    // Return converted rate
+    return amount * unitRates[convertTo].rate / unitRates[convertFrom].rate;
+
 }
 
 // Updates the "Water drank today:" label
-function updateWaterDrank(drank, goal, units) {
-    drank = getWaterDrank();
-    goal = getGoalAmount();
-    units = getUnits();
-
-    const waterDrankLabel = document.getElementById("waterDrankAmount");
-    waterDrankLabel.innerHTML = drank + units + " / " + goal + units;
-
-    checkGoal(drank, goal);
-}
-
-// Reset the goal
-function resetGoal() {
-    var drank = defaultWaterDrank;
+function updateWaterDrank() {
+    var amount = getWaterDrank();
     var goal = getGoalAmount();
     var units = getUnits();
 
-    updateWaterDrank(drank, goal, units);
+    // Get the units string value
+    var unitString = unitsToString(units);
+
+    // See if the units changed after the amount of water drank
+    // was updated
+    if (units !== previousUnits) {
+        // Convert amount drank and goal
+        amount = convertUnits(amount, previousUnits, units);
+        goal = convertUnits(goal, previousUnits, units);
+
+        // Set textbox value to new goal conversion
+        document.getElementById("setGoal").value = goal;
+    }
+
+    // change the label on the page
+    waterDrankLabel.innerHTML = amount + " " + unitString + 
+    " / " + goal + " " + unitString;
+
+    // Check to see if the goal was met
+    checkGoal(amount, goal);
+
+    // Set the previous units to these current units
+    previousUnits = units;
 }
 
 //congradulate the user if they drank the goal amount of water
@@ -88,8 +111,18 @@ function checkGoal(drank, goal) {
     }
 }
 
+// Reset the goal
+function resetGoal() {
+    var drank = defaultWaterDrank;
+    var goal = getGoalAmount();
+    var units = unitRates[getUnits()].string;
+
+    updateWaterDrank(drank, goal, units);
+}
+
 function onload() {
     // Set the water drank label to defaults on page load
+    previousUnits = defaultUnits;
     updateWaterDrank(defaultWaterDrank, defaultGoal, defaultUnits);
 }
 
