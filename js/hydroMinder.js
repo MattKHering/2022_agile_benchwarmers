@@ -101,13 +101,15 @@ function updateWaterDrank() {
     previousUnits = units;
 }
 
-//congradulate the user if they drank the goal amount of water
+//  Congratulate the user if they drank the goal amount of water
 function checkGoal(drank, goal) {
+    // Check to see if the drank amout is more or equal to the user's goal amount.
     if (drank >= goal){
         alert("You drank your goal! Your total is going to reset");
-        resetGoal();
-      
-        //window.location.href = "index.html";
+
+        // restart the cycle
+        window.location.href = "index.html";
+        // resetGoal();
     }
 }
 
