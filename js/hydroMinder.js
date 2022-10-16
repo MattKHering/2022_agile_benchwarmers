@@ -83,8 +83,11 @@ function updateWaterDrank() {
     var goal = getGoalAmount();
     var units = getUnits();
     var typedvalue = document.getElementById("setGoal").value;
- 
-    if ((typedvalue > 800 && unitsDropdown.selectedIndex == 0)) {
+    if ((typedvalue  == "")) {
+        alert("Please enter a number inside of the box and try again.");
+        console.log("Input box empty");
+        return
+    } else if ((typedvalue > 800 && unitsDropdown.selectedIndex == 0)) {
         alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
         console.log("Too many fluidOunces")
         return;
