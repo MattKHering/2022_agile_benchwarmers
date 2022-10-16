@@ -27,7 +27,7 @@ const unitRates = {
 };
 
 // Set default values
-const defaultWaterDrank = 5;
+const defaultWaterDrank = 0;
 const defaultGoal = 125;
 const defaultUnits = unitsDropdown[0].value;
 
@@ -83,8 +83,8 @@ function updateWaterDrank() {
     var goal = getGoalAmount();
     var units = getUnits();
     var typedvalue = document.getElementById("setGoal").value;
-    if ((typedvalue  == "")) {
-        alert("Please enter a number inside of the box and try again.");
+    if ((typedvalue  == "" | typedvalue <= 0)) {
+        alert("Please enter a positive number inside of the box and try again.");
         console.log("Input box empty");
         return
     } else if ((typedvalue > 800 && unitsDropdown.selectedIndex == 0)) {
