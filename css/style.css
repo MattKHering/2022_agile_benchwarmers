@@ -8,6 +8,7 @@ body {
   color: white;
   background-color: gray;
   font-family: verdana, arial, sans-serif;
+  background-image: url(../images/Bottles.png);
 }
 
 main {
@@ -51,6 +52,7 @@ footer {
   padding-right: 50px;
   bottom: 0;
   align-content: center;
+  margin-top: 200px;
 }
 
 a {
@@ -69,6 +71,7 @@ a:hover {
   background-position: center;
   min-width: 400px;
   text-align: center;
+  min-height: 600px;
 }
 
 #settings {

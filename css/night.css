@@ -8,6 +8,7 @@ header {
 	color: white;
 	background-color: black;
 	font-family: verdana, arial, sans-serif;
+  background-image: url(../images/nightBottles.png);
   }
   
   main {
@@ -51,6 +52,7 @@ header {
 	padding-right: 50px;
 	bottom: 0;
 	align-content: center;
+  margin-top: 200px;
   }
   
   a {
@@ -69,6 +71,7 @@ header {
 	background-position: center;
 	min-width: 400px;
 	text-align: center;
+  min-height: 600px;
   }
 
   #settings {
