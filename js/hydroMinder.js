@@ -75,8 +75,33 @@ function updateWaterDrank() {
     var amount = getWaterDrank();
     var goal = getGoalAmount();
     var units = getUnits();
+    var typedvalue = document.getElementById("setGoal").value;
+ 
+    if ((typedvalue > 800 && unitsDropdown.selectedIndex == 0)) {
+        alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
+        console.log("Too many fluidOunces")
+        return;
+     } else if ((typedvalue > 100.1 && unitsDropdown.selectedIndex == 1)) {
+        alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
+        console.log("Too many cups")
+        return;
+     } else if ((typedvalue > 6.26 && unitsDropdown.selectedIndex == 2)) {
+        alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
+        console.log("Too many gallons")
+        return;
+     } else if ((typedvalue > 23658.9 && unitsDropdown.selectedIndex == 3)) {
+        alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
+        console.log("Too many milliliters")
+        return;
+     } else if ((typedvalue > 23.66 && unitsDropdown.selectedIndex == 4)) {
+        alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
+        console.log("Too many liters")
+        return;
+     } else {
 
-    // Get the units string value
+        // Add the rest of the code into this area
+
+            // Get the units string value
     var unitString = unitsToString(units);
 
     // See if the units changed after the amount of water drank
@@ -99,6 +124,8 @@ function updateWaterDrank() {
 
     // Set the previous units to these current units
     previousUnits = units;
+
+     }
 }
 
 //  Congratulate the user if they drank the goal amount of water
