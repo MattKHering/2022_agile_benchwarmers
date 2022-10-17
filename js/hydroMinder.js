@@ -57,8 +57,11 @@ function getWaterDrank() {
 }
 
 // Get the goal amount set by the user
-function getGoalAmount() {
+function getGoalAmount(goalAmount) {
+    goalAmount = document.getElementById("setGoal").value;
+    console.log(goalAmount)
     return document.getElementById("setGoal").value;
+    
 }
 
 // Set the goal amount
@@ -83,10 +86,11 @@ function updateWaterDrank() {
     var goal = getGoalAmount();
     var units = getUnits();
     var typedvalue = document.getElementById("setGoal").value;
-    if ((typedvalue  == "" | typedvalue <= 0)) {
+    if ((typedvalue  == "" | typedvalue <= 0) && (goaltrigger = false)) {
         alert("Please enter a positive number inside of the box and try again.");
         console.log("Input box empty");
         return
+        
     } else if ((typedvalue > 800 && unitsDropdown.selectedIndex == 0)) {
         alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
         console.log("Too many fluidOunces")
@@ -109,9 +113,9 @@ function updateWaterDrank() {
         return;
      } else {
 
-        // Add the rest of the code into this area
 
-            // Get the units string value
+
+    // Get the units string value
     var unitString = unitsToString(units);
 
     // See if the units changed after the amount of water drank
@@ -129,11 +133,13 @@ function updateWaterDrank() {
     checkGoal(amount, goal);
 
     // Clear the goal textbox
-    document.getElementById("setGoal").value = "";
+    // document.getElementById("setGoal").value = "";
+
+    // Hide the control box instead of clearing the box
+    document.getElementById("goalControl").style.display = "none";
 
     // Set the previous units to these current units
     previousUnits = units;
-
     }
 }
 
@@ -186,19 +192,50 @@ setGoalButton.addEventListener("click", function() {
     updateWaterDrank();
 });
 
+// onClick listener for the "Add 1 Ounce" Button
+addOneFluidOunce.addEventListener("click", function() {
+
+    // Add the button amount to the total drank amount.
+    amountDrank = amountDrank + 1
+
+    // Update the water drank label
+    updateWaterDrank(amountDrank);
+});
+
+// onClick listener for the "Add 8 Ounces" Button
+addEightFluidOunce.addEventListener("click", function() {
+
+    // Add the button amount to the total drank amount.
+    amountDrank = amountDrank + 8
+
+    // Update the water drank label
+    updateWaterDrank(amountDrank);
+});
+
+// onClick listener for the "Add 12 Ounces" Button
+addTwelveFluidOunce.addEventListener("click", function() {
+
+    // Add the button amount to the total drank amount.
+    amountDrank = amountDrank + 12
+
+    // Update the water drank label
+    updateWaterDrank(amountDrank);
+});
+
+
+
 function onload() {
     // Set the water drank label to defaults on page load
     updateWaterDrankDefaults();
 }
 
-
+// Alarm function for test button
 function alarm() {
-    
-     var audio = new Audio("audio/WaterDrop.mp3");
-        audio.play();
-
+    var audio = new Audio("audio/WaterDrop.mp3");
+    audio.play();
 }
 
+// Enable and disable button 
 const button = document.getElementById('soundButton')
 if (button.innerText === 'Enable/DisableSound') {
     button.disabled = true
