@@ -194,9 +194,16 @@ function onload() {
 
 function alarm() {
     
-    window.location.href = "wateralarm.html";
+     var audio = new Audio("audio/WaterDrop.mp3");
+        audio.play();
 
 }
+
+const button = document.getElementById('soundButton')
+if (button.innerText === 'Enable/DisableSound') {
+    button.disabled = true
+} 
+
 
 function waterConfirm(didDrinkWater) {
     if (!didDrinkWater) {
@@ -224,4 +231,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('myCSS').href = 'css/style.css';
       }
     });
+    
+
   });
