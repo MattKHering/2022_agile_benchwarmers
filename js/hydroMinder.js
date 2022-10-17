@@ -230,12 +230,18 @@ function onload() {
     updateWaterDrankDefaults();
 }
 
-
-function alarm() {
-    
-    window.location.href = "wateralarm.html";
-
+// Alarm function for test button
+function alarm("audio/WaterDrop.mp3") {
+    const audio = new Audio("audio/WaterDrop.mp3");
+    audio.play();
 }
+
+// Enable and disable button 
+const button = document.getElementById('soundButton')
+if (button.innerText === 'Enable/DisableSound') {
+    button.disabled = true
+} 
+
 
 function waterConfirm(didDrinkWater) {
     if (!didDrinkWater) {
@@ -263,4 +269,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('myCSS').href = 'css/style.css';
       }
     });
+    
+
   });
