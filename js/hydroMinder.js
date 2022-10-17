@@ -256,10 +256,10 @@ function waterConfirm(didDrinkWater) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    var checkbox = document.querySelector('input[type="checkbox"]');
-  
-    checkbox.addEventListener('change', function () {
-        if (checkbox.checked) {
+
+    var nightMode = document.getElementById('nightMode');
+    nightMode.addEventListener('change', function () {
+        if (nightMode.checked) {
             // Do this when checked
             document.getElementById('myCSS').href = 'css/night.css';
             console.log('Checked');
@@ -268,12 +268,21 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('myCSS').href = 'css/style.css';
         }
     });
+
+
+    var enableSound = document.getElementById('enableSound');
+    enableSound.addEventListener('change', function () {
+        if (enableSound.checked) {
+            console.log('Checkbox 2 checked');
+        } else {
+
+        }
+    });
 });
 
 
 const customTimeDiv = document.getElementById('customTimeDiv');
 const custom = document.getElementById('custom');
-
 
 radioForm.addEventListener('change', function() {
     // Test if the "Custom" time option is selected
