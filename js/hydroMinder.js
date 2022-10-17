@@ -202,7 +202,7 @@ function onload() {
 // Alarm function for test button
 function alarm() {
     var audio = new Audio("audio/WaterDrop.mp3");
-    audio.play();
+    if (!enableSound.checked) return audio.play();
 }
 
 // Enable and disable button 
@@ -225,9 +225,11 @@ function waterConfirm(didDrinkWater) {
 }
 
 // Settings switches logic
+var nightMode = document.getElementById('nightMode');
+var enableSound = document.getElementById('enableSound');
+
 document.addEventListener('DOMContentLoaded', function () {
 
-    var nightMode = document.getElementById('nightMode');
     nightMode.addEventListener('change', function () {
         if (nightMode.checked) {
             // Do this when checked
@@ -239,8 +241,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
-    var enableSound = document.getElementById('enableSound');
     enableSound.addEventListener('change', function () {
         if (enableSound.checked) {
             console.log('Checkbox 2 checked');
