@@ -231,8 +231,8 @@ function onload() {
 }
 
 // Alarm function for test button
-function alarm("audio/WaterDrop.mp3") {
-    const audio = new Audio("audio/WaterDrop.mp3");
+function alarm() {
+    var audio = new Audio("audio/WaterDrop.mp3");
     audio.play();
 }
 
