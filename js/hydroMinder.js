@@ -73,6 +73,9 @@ function updateWaterDrank() {
     var units = getUnits();
         
     // Test if the input goal amount is excessive (> 800 fl oz)
+    // Converts whatever units is entered into fl oz and compares
+    //
+    // Pretty neat!
     if (convertUnits(goal, units, unitsDropdown.options[0].value) > 800) {
 
         window.alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
@@ -205,7 +208,7 @@ function alarm() {
 // Enable and disable button 
 const button = document.getElementById('soundButton')
 if (button.innerText === 'Enable/DisableSound') {
-    button.disabled = true
+    button.disabled = true;
 } 
 
 
@@ -250,17 +253,75 @@ document.addEventListener('DOMContentLoaded', function () {
 // Timer interval logic
 const customTimeDiv = document.getElementById('customTimeDiv');
 const custom = document.getElementById('custom');
+const timeInput = document.getElementById('timeInput');
+const timeSelect = document.getElementById('timeSelect');
+const startTimerButton = document.getElementById('startTimerButton');
+var radios = document.getElementsByName("timeRadio");
+var timeInterval = 0;
+var timeUnit = "";
 
+// Radio buttons change listener
 radioForm.addEventListener('change', function() {
-    // Test if the "Custom" time option is selected
-    if (custom.checked) {
-        // display the textbox, dropdown, and button
 
+    if (custom.checked) {
+        
+        // display div
         customTimeDiv.style.display = 'block';
 
     } else {
 
         // Hide the elements when it is unchecked
         customTimeDiv.style.display = 'none';
+             
     }
 });
+
+// Start timer button listener
+startTimer.addEventListener('click', function() {
+
+    if (custom.checked) {
+
+        // Get input time value
+        if (!timeInput.value > 0) return window.alert("Please enter a time interval greater than zero.");
+        
+        timeInterval = timeInput.value;
+
+        // Get selected time unit
+        timeUnit = timeSelect.options[timeSelect.selectedIndex].value;
+
+        if (timeUnit == "hours") timeInterval *= 60;
+
+        // Start the countdown timer
+        beginTimer(timeInterval);
+        
+    } else {
+
+        // Get value of checked radio button
+        for (i = 0; i < radios.length; i++) {
+
+            if (radios[i].checked) {
+
+                timeInterval = radios[i].value;
+
+                // Start the countdown timer
+                beginTimer(timeInterval);
+
+            }
+        }
+    }    
+});
+
+// Begin timer function
+function beginTimer(mins) {
+    
+    // For testing, time is lowered.
+    // 10 minutes = 1 second real time
+    
+    // Convert time to milliseconds
+    mins *= 100;
+
+    setTimeout(function () {
+
+        alarm();
+    }, mins);
+}
