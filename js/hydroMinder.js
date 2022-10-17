@@ -205,12 +205,6 @@ function alarm() {
     if (!enableSound.checked) return audio.play();
 }
 
-// Enable and disable button 
-const button = document.getElementById('soundButton')
-if (button.innerText === 'Enable/DisableSound') {
-    button.disabled = true;
-} 
-
 
 function waterConfirm(didDrinkWater) {
     if (!didDrinkWater) {
