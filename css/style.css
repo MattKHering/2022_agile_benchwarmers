@@ -75,7 +75,7 @@ a:hover {
 }
 
 #settings {
-margin-left: 90%;
+  margin-left: 90%;
 }
 
 /* The switch - the box around the slider */
@@ -150,6 +150,19 @@ input:checked + .slider:before {
   top: 65px;
   background-color: white;
   border-radius: 30px;
+}
+
+/* Hide "Custom" time interval input and select elements */
+#customTimeDiv {
+  display: none;
+  margin-bottom: 1em;
+}
+
+#radioForm {
+  margin: 0 auto;
+  width: fit-content;
+  text-align: left;
+  margin-bottom: 1em;
 }
 
 

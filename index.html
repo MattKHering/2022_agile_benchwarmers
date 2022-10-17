@@ -26,9 +26,33 @@
 		<p>The app that encourages hydration<br></p>
 
 		<p>Please select a time interval<br></p>
-        
-        <button onclick="alarm()">Test Alarm</button><br><br>
-        
+		
+		<form id="radioForm">
+			<input type="radio" name="timeRadio" value="30" checked>
+			<label for="30min">30 min.</label><br>
+
+			<input type="radio" name="timeRadio" value="45">
+			<label for="45min">45 min.</label><br>
+
+			<input type="radio" name="timeRadio" value="60">
+			<label for="60min">1 hr.</label><br>
+
+			<input type="radio" name="timeRadio" value="120">
+			<label for="120min">2 hr.</label><br>
+
+			<input type="radio" name="timeRadio" id="custom">
+			<label for="custom">Custom</label><br>
+		</form>
+
+		<div id="customTimeDiv">
+			<input id="timeInput" type="number"/>
+			<select name="customTime" id="timeSelect">
+				<option value="minutes">minutes</option>
+				<option value="hours">hours</option>
+			</select><br>
+			<button id="setCustomTimeButton">Set Interval</button><br>
+        </div>
+
         <button id="soundButton">Enable/DisableAlarm</button>
 		
 		
@@ -47,6 +71,7 @@
 
 
 		<p>Water drank today: <span id="waterDrankAmount"></span></p>
+		<br><br><button onclick="alarm()">Test Alarm</button>
 		
 
 		<br><br>

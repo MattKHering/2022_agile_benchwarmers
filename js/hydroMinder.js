@@ -134,7 +134,7 @@ function updateWaterDrank() {
     // Set the previous units to these current units
     previousUnits = units;
 
-     }
+    }
 }
 
 // Updates the "Water drank today:" label with default values.
@@ -222,15 +222,32 @@ document.addEventListener('DOMContentLoaded', function () {
     var checkbox = document.querySelector('input[type="checkbox"]');
   
     checkbox.addEventListener('change', function () {
-      if (checkbox.checked) {
-        // Do this when checked
-        document.getElementById('myCSS').href = 'css/night.css';
-        console.log('Checked');
-      } else {
-        // When not checked/unchecked
-        document.getElementById('myCSS').href = 'css/style.css';
-      }
+        if (checkbox.checked) {
+            // Do this when checked
+            document.getElementById('myCSS').href = 'css/night.css';
+            console.log('Checked');
+        } else {
+            // When not checked/unchecked
+            document.getElementById('myCSS').href = 'css/style.css';
+        }
     });
-    
+});
 
-  });
+
+const customTimeDiv = document.getElementById('customTimeDiv');
+const custom = document.getElementById('custom');
+
+
+radioForm.addEventListener('change', function() {
+    // Test if the "Custom" time option is selected
+    if (!custom.checked) {
+        // display the textbox, dropdown, and button
+
+        customTimeDiv.style.display = 'none';
+
+    } else {
+
+        // Hide the elements when it is unchecked
+        customTimeDiv.style.display = 'block';
+    }
+});
