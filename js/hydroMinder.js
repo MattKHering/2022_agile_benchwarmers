@@ -2,6 +2,7 @@
 const unitsDropdown = document.getElementById("unitsSelect");
 const waterDrankLabel = document.getElementById("waterDrankAmount");
 const setGoalButton = document.getElementById("setGoalButton");
+const setGoalInput = document.getElementById("setGoal");
 
 const unitRates = {
     fluidOunces: {
@@ -11,18 +12,6 @@ const unitRates = {
     milliliters: {
         rate: 29.5735,
         string: "mL"
-    },
-    liters: {
-        rate: 0.0295735,
-        string: "L"
-    },
-    cups: {
-        rate: 0.125,
-        string: "cups"
-    }, 
-    gallons: {
-        rate: 0.0078125,
-        string: "gal"
     }
 };
 
@@ -57,11 +46,8 @@ function getWaterDrank() {
 }
 
 // Get the goal amount set by the user
-function getGoalAmount(goalAmount) {
-    goalAmount = document.getElementById("setGoal").value;
-    console.log(goalAmount)
-    return document.getElementById("setGoal").value;
-    
+function getGoalAmount() {
+    return goalAmount;
 }
 
 // Set the goal amount
@@ -85,61 +71,39 @@ function updateWaterDrank() {
     var amount = getWaterDrank();
     var goal = getGoalAmount();
     var units = getUnits();
-    var typedvalue = document.getElementById("setGoal").value;
-    if ((typedvalue  == "" | typedvalue <= 0) && (goaltrigger = false)) {
-        alert("Please enter a positive number inside of the box and try again.");
-        console.log("Input box empty");
-        return
         
-    } else if ((typedvalue > 800 && unitsDropdown.selectedIndex == 0)) {
-        alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
-        console.log("Too many fluidOunces")
-        return;
-     } else if ((typedvalue > 100.1 && unitsDropdown.selectedIndex == 1)) {
-        alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
-        console.log("Too many cups")
-        return;
-     } else if ((typedvalue > 6.26 && unitsDropdown.selectedIndex == 2)) {
-        alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
-        console.log("Too many gallons")
-        return;
-     } else if ((typedvalue > 23658.9 && unitsDropdown.selectedIndex == 3)) {
-        alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
-        console.log("Too many milliliters")
-        return;
-     } else if ((typedvalue > 23.66 && unitsDropdown.selectedIndex == 4)) {
-        alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
-        console.log("Too many liters")
-        return;
-     } else {
+    // Test if the input goal amount is excessive (> 800 fl oz)
+    if (convertUnits(goal, units, unitsDropdown.options[0].value) > 800) {
 
+        window.alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
+    
+    } else {
 
+        // Get the units string value
+        var unitString = unitsToString(units);
 
-    // Get the units string value
-    var unitString = unitsToString(units);
+        // See if the units changed after the amount of water drank
+        // was updated
+        if (units !== previousUnits && amount > 0) {
+            // Convert amount drank
+            amount = convertUnits(amount, previousUnits, units);
+        }
 
-    // See if the units changed after the amount of water drank
-    // was updated
-    if (units !== previousUnits && amount > 0) {
-        // Convert amount drank
-        amount = convertUnits(amount, previousUnits, units);
-    }
+        // change the label on the page
+        waterDrankLabel.innerHTML = amount + " " + unitString + 
+        " / " + goal + " " + unitString;
 
-    // change the label on the page
-    waterDrankLabel.innerHTML = amount + " " + unitString + 
-    " / " + goal + " " + unitString;
+        // Check to see if the goal was met
+        checkGoal(amount, goal);
 
-    // Check to see if the goal was met
-    checkGoal(amount, goal);
+        // Clear the goal textbox
+        // document.getElementById("setGoal").value = "";
 
-    // Clear the goal textbox
-    // document.getElementById("setGoal").value = "";
+        // Hide the control box instead of clearing the box
+        document.getElementById("goalControl").style.display = "none";
 
-    // Hide the control box instead of clearing the box
-    document.getElementById("goalControl").style.display = "none";
-
-    // Set the previous units to these current units
-    previousUnits = units;
+        // Set the previous units to these current units
+        previousUnits = units;
     }
 }
 
@@ -166,30 +130,34 @@ function checkGoal(drank, goal) {
         alert("You drank your goal! Your total is going to reset");
 
         // restart the cycle
-        window.location.href = "index.html";
-        // resetGoal();
+        resetGoal();
     }
 }
 
 // Reset the goal
 function resetGoal() {
-    var drank = defaultWaterDrank;
-    var goal = getGoalAmount();
-    var units = unitRates[getUnits()].string;
+    setWaterDrank(defaultWaterDrank);
 
-    updateWaterDrank(drank, goal, units);
+    updateWaterDrank();
 }
 
 // onClick listener for the "Set Goal" Button
 setGoalButton.addEventListener("click", function() {
 
-    // Set the goal to the value entered in the text box
-    setGoal(document.getElementById("setGoal").value);
+    // See if the goal entered was valid (> 0)
+    if (setGoalInput.value > 0) {
 
-    // Check if the value entered is a number
+        // Set the goal to the value entered in the text box
+        setGoal(setGoalInput.value);
 
-    // Update the water drank label
-    updateWaterDrank();
+        // Update the water drank label
+        updateWaterDrank();
+
+    } else {
+
+        window.alert("Please enter a valid goal larger than zero.");
+
+    }
 });
 
 // onClick listener for the "Add 1 Ounce" Button
@@ -223,7 +191,6 @@ addTwelveFluidOunce.addEventListener("click", function() {
 });
 
 
-
 function onload() {
     // Set the water drank label to defaults on page load
     updateWaterDrankDefaults();
@@ -254,7 +221,7 @@ function waterConfirm(didDrinkWater) {
     }
 }
 
-
+// Settings switches logic
 document.addEventListener('DOMContentLoaded', function () {
 
     var nightMode = document.getElementById('nightMode');
@@ -280,20 +247,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
+// Timer interval logic
 const customTimeDiv = document.getElementById('customTimeDiv');
 const custom = document.getElementById('custom');
 
 radioForm.addEventListener('change', function() {
     // Test if the "Custom" time option is selected
-    if (!custom.checked) {
+    if (custom.checked) {
         // display the textbox, dropdown, and button
 
-        customTimeDiv.style.display = 'none';
+        customTimeDiv.style.display = 'block';
 
     } else {
 
         // Hide the elements when it is unchecked
-        customTimeDiv.style.display = 'block';
+        customTimeDiv.style.display = 'none';
     }
 });
