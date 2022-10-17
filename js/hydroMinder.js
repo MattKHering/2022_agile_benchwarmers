@@ -191,11 +191,13 @@ function onload() {
     updateWaterDrankDefaults();
 }
 
+// Alarm function for test button
 function alarm("audio/WaterDrop.mp3") {
     const audio = new Audio("audio/WaterDrop.mp3");
     audio.play();
 }
 
+// Enable and disable button 
 const button = document.getElementById('soundButton')
 if (button.innerText === 'Enable/DisableSound') {
     button.disabled = true
