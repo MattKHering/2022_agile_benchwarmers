@@ -65,6 +65,14 @@ function convertUnits(amount, convertFrom, convertTo) {
     return amount * unitRates[convertTo].rate / unitRates[convertFrom].rate;
 
 }
+function progress() {
+ 
+    var prog = document.getElementById("myprogressBar");
+    var total = (amountDrank/goalAmount) * 100;
+    prog.style.width = total + "%";
+   
+  
+}
 
 // Updates the "Water drank today:" label
 function updateWaterDrank() {
@@ -108,6 +116,7 @@ function updateWaterDrank() {
         // Set the previous units to these current units
         previousUnits = units;
     }
+    progress();
 }
 
 // Updates the "Water drank today:" label with default values.

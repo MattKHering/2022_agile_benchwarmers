@@ -155,3 +155,81 @@ header {
 	text-align: left;
 	margin-bottom: 1em;
   }
+
+.container {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    margin: 50px auto;
+}
+
+.container .box {
+    position: relative;
+    width: calc(400px - 30px);
+    height: calc(400px - 30px);
+    background: #000;
+    float: left;
+    margin: 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 10px;
+    font-size: 25px;
+}
+p {
+    color: #000
+}
+
+.container .box .content {
+    font-size: 12px;
+}
+
+.container .box .content {
+    position: absolute;
+    top: 100%;
+    height: calc(100% - 100px);
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.container .box:hover .content {
+    top: 100px;
+    opacity: 1;
+}
+
+.container .box .content h3 {
+    margin: 0 0 10px;
+    padding: 0;
+    color: #fff;
+    font-size: 24px;
+}
+
+.container .box .content p {
+    margin: 0;
+    padding: 0;
+    color: #000;
+}
+
+.container .box:nth-child(1) {
+    background: white;
+}
+
+#Progress_Status {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 25px;
+}
+  
+#myprogressBar {
+  width: 0%;
+  height: 30px;
+  background-color: #2a3e66;
+  border-radius: 25px;
+  text-align: center;
+  line-height: 32px;
+  color: black;
+  align-content: center;
+  
+}
