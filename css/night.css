@@ -8,7 +8,7 @@ body {
   color: white;
   background-color: black;
   font-family: verdana, arial, sans-serif;
-  background-image: url(../images/nightBottles.png);
+  background-image: url("../images/nightBottles.png");
 }
 
 main {
@@ -134,15 +134,15 @@ a:hover {
   transition: .4s;
 }
 
-input:checked+.slider {
-  background-color: #2196F3;
+input:checked + .slider {
+  background-color: #2196f3;
 }
 
-input:focus+.slider {
-  box-shadow: 0 0 1px #2196F3;
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked+.slider:before {
+input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -156,7 +156,6 @@ input:checked+.slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-
 
 /* Hide "Custom" time interval input and select elements */
 #customTimeDiv {
