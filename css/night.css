@@ -78,6 +78,21 @@ header {
 	margin-left: 90%;
 	}
 
+	#Progress_Status {
+		width: 100%;
+		background-color: #ddd;
+		border-radius: 25px;
+	  }
+		
+	  #myprogressBar {
+		width: 0%;
+		height: 35px;
+		background-color: #3b3da5;
+		text-align: center;
+		line-height: 32px;
+		color: black;
+		border-radius: 25px;
+	  }
   
 /* The switch - the box around the slider */
 .switch {
@@ -214,22 +229,4 @@ p {
 
 .container .box:nth-child(1) {
     background: white;
-}
-
-#Progress_Status {
-  width: 100%;
-  background-color: #ddd;
-  border-radius: 25px;
-}
-  
-#myprogressBar {
-  width: 0%;
-  height: 30px;
-  background-color: #2a3e66;
-  border-radius: 25px;
-  text-align: center;
-  line-height: 32px;
-  color: black;
-  align-content: center;
-  
 }
