@@ -65,9 +65,10 @@ function convertUnits(amount, convertFrom, convertTo) {
     return amount * unitRates[convertTo].rate / unitRates[convertFrom].rate;
 
 }
+
 function progress() {
  
-    var prog = document.getElementById("myprogressBar");
+    var prog = document.getElementById("progress-bar");
     var total = (amountDrank/goalAmount) * 100;
     prog.style.width = total + "%";
    
@@ -254,11 +255,12 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Timer interval logic
-const customTimeDiv = document.getElementById('customTimeDiv');
+const customTimeDiv = document.getElementById('custom-time-div');
 const custom = document.getElementById('custom');
 const timeInput = document.getElementById('timeInput');
 const timeSelect = document.getElementById('timeSelect');
 const startTimerButton = document.getElementById('startTimerButton');
+const radioForm = document.getElementById("radio-form");
 var radios = document.getElementsByName("timeRadio");
 var timeInterval = 0;
 var timeUnit = "";

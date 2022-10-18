@@ -1,35 +1,24 @@
-header {
-  color: white;
-  text-align: center;
-  background-color: #23addb;
-}
-
 body {
   color: white;
-  background-color: gray;
+  background: gray url("../images/Bottles.png");
   font-family: verdana, arial, sans-serif;
-  background-image: url("../images/Bottles.png");
 }
 
+/* Main hero content */
 main {
-  padding: 20px;
   display: block;
-  background-color: #23addb;
-  margin-left: 175px;
-  margin-right: 175px;
   position: relative;
+  min-width: 400px;
+  min-height: 600px;
+  background: #23addb center 100%;
+  padding: 20px;
+  margin: 0 175px;
   border-radius: 34px;
-}
-
-#color-square {
-  min-width: 100px;
-  min-height: 100px;
+  text-align: center;
 }
 
 h1 {
-  color: white;
   height: 100px;
-  margin: 0;
   font-family: georgia, times-new-roman, serif;
 }
 
@@ -42,17 +31,8 @@ h3 {
   text-transform: uppercase;
 }
 
-footer {
-  color: white;
-  background-color: #23addb;
-  text-align: center;
-  font-size: 0.7em;
-  padding: 10px;
-  padding-left: 50px;
-  padding-right: 50px;
-  bottom: 0;
-  align-content: center;
-  margin-top: 200px;
+p {
+  color: #000;
 }
 
 a {
@@ -63,17 +43,7 @@ a:hover {
   color: white;
 }
 
-#hero {
-  height: auto;
-  color: #f5f5dc;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  min-width: 400px;
-  text-align: center;
-  min-height: 600px;
-}
-
+/* Switches container */
 #settings {
   margin-left: 90%;
 }
@@ -102,11 +72,10 @@ a:hover {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  transition: 0.4s;
 }
 
-.slider:before {
+.slider::before {
   position: absolute;
   content: "";
   height: 26px;
@@ -114,8 +83,7 @@ a:hover {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
@@ -126,9 +94,7 @@ input:focus + .slider {
   box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
+input:checked + .slider::before {
   transform: translateX(26px);
 }
 
@@ -137,39 +103,24 @@ input:checked + .slider:before {
   border-radius: 34px;
 }
 
-.slider.round:before {
+.slider.round::before {
   border-radius: 50%;
 }
 
-#Progress_Status {
-  width: 100%;
-  background-color: #ddd;
-  border-radius: 25px;
-}
-
-#myprogressBar {
-  width: 0%;
-  height: 35px;
-  background-color: #3b3da5;
-  text-align: center;
-  line-height: 32px;
-  color: black;
-  border-radius: 25px;
-}
-
-/* Hide "Custom" time interval input and select elements */
-#customTimeDiv {
+/* Time radio buttons */
+#custom-time-div {
   display: none;
   margin-bottom: 1em;
 }
 
-#radioForm {
+#radio-form {
   margin: 0 auto;
   width: fit-content;
   text-align: left;
   margin-bottom: 1em;
 }
 
+/* benefits container */
 .container {
   position: absolute;
   width: 400px;
@@ -190,14 +141,6 @@ input:checked + .slider:before {
   font-size: 25px;
 }
 
-p {
-  color: #000
-}
-
-.container .box .content {
-  font-size: 12px;
-}
-
 .container .box .content {
   position: absolute;
   top: 100%;
@@ -207,6 +150,7 @@ p {
   box-sizing: border-box;
   transition: 0.5s;
   opacity: 0;
+  font-size: 12px;
 }
 
 .container .box:hover .content {
@@ -229,4 +173,26 @@ p {
 
 .container .box:nth-child(1) {
   background: white;
+}
+
+/* Progress bar */
+#progress-status {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 25px;
+}
+
+#progress-bar {
+  width: 0%;
+  height: 35px;
+  background-color: #3b3da5;
+  line-height: 32px;
+  color: black;
+  border-radius: 25px;
+  margin-top: 3em;
+}
+
+footer {
+  font-size: 0.7em;
+  margin-top: 5em;
 }
