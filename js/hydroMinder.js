@@ -180,11 +180,22 @@ setGoalButton.addEventListener("click", function() {
     }
 });
 
+function hideAlertBox() {
+    document.getElementById("alertBox").style.display = "none";
+}
+
+function showAlertBox() {
+    document.getElementById("alertBox").style.display = "inline-block";
+}
+
 // onClick listener for the "Add 1 Ounce" Button
 addOneFluidOunce.addEventListener("click", function() {
 
     // Add the button amount to the total drank amount.
     amountDrank = amountDrank + 1
+
+    // Hide the alert box
+    hideAlertBox();
 
     // Update the water drank label
     updateWaterDrank(amountDrank);
@@ -196,6 +207,9 @@ addEightFluidOunce.addEventListener("click", function() {
     // Add the button amount to the total drank amount.
     amountDrank = amountDrank + 8
 
+    // Hide the alert box
+    hideAlertBox();
+
     // Update the water drank label
     updateWaterDrank(amountDrank);
 });
@@ -205,6 +219,9 @@ addTwelveFluidOunce.addEventListener("click", function() {
 
     // Add the button amount to the total drank amount.
     amountDrank = amountDrank + 12
+
+    // Hide the alert box
+    hideAlertBox();
 
     // Update the water drank label
     updateWaterDrank(amountDrank);
@@ -216,6 +233,9 @@ addOneMilliliter.addEventListener("click", function() {
     // Add the button amount to the total drank amount.
     amountDrank = amountDrank + 1
 
+    // Hide the alert box
+    hideAlertBox();
+
     // Update the water drank label
     updateWaterDrank(amountDrank);
 });
@@ -225,6 +245,9 @@ addTenMilliliter.addEventListener("click", function() {
 
     // Add the button amount to the total drank amount.
     amountDrank = amountDrank + 10
+
+    // Hide the alert box
+    hideAlertBox();
 
     // Update the water drank label
     updateWaterDrank(amountDrank);
@@ -236,15 +259,21 @@ addOneHundredMilliliter.addEventListener("click", function() {
     // Add the button amount to the total drank amount.
     amountDrank = amountDrank + 100
 
+    // Hide the alert box
+    hideAlertBox();
+
     // Update the water drank label
     updateWaterDrank(amountDrank);
 });
 
-// onClick listener for the "Add 100 Milliliter" Button
+// onClick listener for the "Add 1000 Milliliter" Button
 addOneThousandMilliliter.addEventListener("click", function() {
 
     // Add the button amount to the total drank amount.
     amountDrank = amountDrank + 1000
+    
+    // Hide the alert box
+    hideAlertBox();
 
     // Update the water drank label
     updateWaterDrank(amountDrank);
@@ -257,10 +286,10 @@ function onload() {
 
 // Alarm function for test button
 function alarm() {
+    showAlertBox();
     var audio = new Audio("audio/WaterDrop.mp3");
     if (!enableSound.checked) return audio.play();
 }
-
 
 function waterConfirm(didDrinkWater) {
     if (!didDrinkWater) {

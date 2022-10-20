@@ -52,9 +52,20 @@ a:hover {
   display: none;
 }
 
-
 #milliliterAdd {
   display: none;
+}
+
+#alertBox {
+  min-width: 100%;
+  min-height: 300px;
+  text-align: center;
+  background-color: red;
+  font-weight: bold;
+  font-size: larger;
+  display: none;
+  border-radius: 34px;
+  margin: 15;
 }
 
 /* Sliders div */
@@ -197,7 +208,8 @@ label {
 #progress-status {
   width: 100%;
   background-color: #ddd;
-  border-radius: 25px;
+  border-radius: 34px;
+  margin: 15;
 }
 
 #progress-bar {
