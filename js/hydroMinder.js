@@ -116,6 +116,13 @@ function updateWaterDrank() {
 
         // Set the previous units to these current units
         previousUnits = units;
+
+        //Show the input buttons depending on which unit is slected
+        if ((unitsDropdown.options.selectedIndex) == 0) {
+            document.getElementById("ounceAdd").style.display = "inline-block";
+        } else if (unitsDropdown.options.selectedIndex == 1) {
+            document.getElementById("milliliterAdd").style.display = "inline-block";
+        }
     }
     progress();
 }
@@ -203,6 +210,45 @@ addTwelveFluidOunce.addEventListener("click", function() {
     updateWaterDrank(amountDrank);
 });
 
+// onClick listener for the "Add 1 Milliliter" Button
+addOneMilliliter.addEventListener("click", function() {
+
+    // Add the button amount to the total drank amount.
+    amountDrank = amountDrank + 1
+
+    // Update the water drank label
+    updateWaterDrank(amountDrank);
+});
+
+// onClick listener for the "Add 10 Milliliter" Button
+addTenMilliliter.addEventListener("click", function() {
+
+    // Add the button amount to the total drank amount.
+    amountDrank = amountDrank + 10
+
+    // Update the water drank label
+    updateWaterDrank(amountDrank);
+});
+
+// onClick listener for the "Add 100 Milliliter" Button
+addOneHundredMilliliter.addEventListener("click", function() {
+
+    // Add the button amount to the total drank amount.
+    amountDrank = amountDrank + 100
+
+    // Update the water drank label
+    updateWaterDrank(amountDrank);
+});
+
+// onClick listener for the "Add 100 Milliliter" Button
+addOneThousandMilliliter.addEventListener("click", function() {
+
+    // Add the button amount to the total drank amount.
+    amountDrank = amountDrank + 1000
+
+    // Update the water drank label
+    updateWaterDrank(amountDrank);
+});
 
 function onload() {
     // Set the water drank label to defaults on page load

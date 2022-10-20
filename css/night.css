@@ -48,6 +48,15 @@ a:hover {
   color: white;
 }
 
+#ounceAdd {
+  display: none;
+}
+
+
+#milliliterAdd {
+  display: none;
+}
+
 /* Sliders div */
 #settings {
   margin-left: 90%;

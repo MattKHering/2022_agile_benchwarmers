@@ -43,6 +43,15 @@ a:hover {
   color: white;
 }
 
+#ounceAdd {
+  display: none;
+}
+
+
+#milliliterAdd {
+  display: none;
+}
+
 /* Switches container */
 #settings {
   margin-left: 90%;
