@@ -1,4 +1,12 @@
 /* jshint curly: true, esversion: 6, eqeqeq: true, latedef: true, laxbreak: true */
+
+//=======================================//
+// Adjust speed of website timer here!   //
+// Value is x times faster than realtime.//
+//====================================== //
+const HYPERSPEED_MULTIPLIER = 10;
+
+
 const unitsDropdown = document.getElementById("unitsSelect");
 const waterDrankLabel = document.getElementById("waterDrankAmount");
 const setGoalButton = document.getElementById("setGoalButton");
@@ -284,23 +292,11 @@ function onload() {
     updateWaterDrankDefaults();
 }
 
-// Alarm function for test button
+// Alarm function
 function alarm() {
     showAlertBox();
     var audio = new Audio("audio/WaterDrop.mp3");
     if (!enableSound.checked) return audio.play();
-}
-
-function waterConfirm(didDrinkWater) {
-    if (!didDrinkWater) {
-        alert("Please drink some water!");
-    } else {
-        alert("Good Job, stay hydrated!!!");
-        
-        //logic to add to drinking totals entered here.
-        
-        window.location.href = "index.html";
-    }
 }
 
 // Settings switches logic
@@ -313,7 +309,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (nightMode.checked) {
             // Do this when checked
             document.getElementById('myCSS').href = 'css/night.css';
-            console.log('Checked');
         } else {
             // When not checked/unchecked
             document.getElementById('myCSS').href = 'css/style.css';
@@ -322,7 +317,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     enableSound.addEventListener('change', function () {
         if (enableSound.checked) {
-            console.log('Checkbox 2 checked');
         } else {
 
         }
@@ -356,6 +350,7 @@ radioForm.addEventListener('change', function() {
     }
 });
 
+
 // Start timer button listener
 startTimer.addEventListener('click', function() {
 
@@ -364,12 +359,14 @@ startTimer.addEventListener('click', function() {
         // Get input time value
         if (!timeInput.value > 0) return window.alert("Please enter a time interval greater than zero.");
         
-        timeInterval = timeInput.value;
+        // Convert minutes to seconds
+        timeInterval = timeInput.value * 60 / HYPERSPEED_MULTIPLIER;
 
         // Get selected time unit
         timeUnit = timeSelect.options[timeSelect.selectedIndex].value;
 
-        if (timeUnit == "hours") timeInterval *= 60;
+        // Convert hours to seconds
+        if (timeUnit == "hours") timeInterval *= 3600 / HYPERSPEED_MULTIPLIER;
 
         // Start the countdown timer
         beginTimer(timeInterval);
@@ -381,27 +378,97 @@ startTimer.addEventListener('click', function() {
 
             if (radios[i].checked) {
 
-                timeInterval = radios[i].value;
+                // Convert into seconds
+                timeInterval = radios[i].value * 60 / HYPERSPEED_MULTIPLIER;
 
                 // Start the countdown timer
                 beginTimer(timeInterval);
-
             }
         }
     }    
 });
 
+// Formats timer label
+function formatTimer(time) {
+    // Time is innput in seconds
+
+    // Format hours
+    var hours = Math.floor(time / 3600);
+
+    // Format minutes 
+    var minutes = Math.floor((time / 60) % 60);
+
+    // If minutes is less than 10 display a leading zero
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+
+    // Format seconds
+    var seconds = time % 60;
+
+    // If seconds is less than 10 display a leading zero
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+
+    return hours + ":" + minutes + ":" + seconds;
+}
+
+var timerInterval = null;
+const timerLabel = document.getElementById("timerLabel");
+var timerIsRunning = false;
+
+// Calls when timer is done
+function timerEnd() {
+    console.log("Timer Ended");
+    timerIsRunning = false;
+    seconds = 0;
+    clearInterval(timerInterval);
+    alarm();
+    showAlertBox();
+}
+
+// Called when timer should be restarted
+function restartTimer(seconds) {
+    // Make sure we know the timer isn't running
+    timerIsRunning = false;
+    // Stop the timer (in code)
+    clearInterval(timerInterval);
+    beginTimer(seconds)
+}
+
 // Begin timer function
-function beginTimer(mins) {
-    
-    // For testing, time is lowered.
-    // 10 minutes = 1 second real time
-    
-    // Convert time to milliseconds
-    mins *= 100;
+function beginTimer(seconds) {
 
-    setTimeout(function () {
+    // Clear time passed value
+    var timePassed = 0;
+    var timeLeft = 0;
+    
+    // Make sure alert box is hidden
+    hideAlertBox();
 
-        alarm();
-    }, mins);
+    if (timerIsRunning) {
+        restartTimer(seconds);
+    } else {
+
+    
+        timerInterval = setInterval(() => {
+
+            timerIsRunning = true;
+
+            // Seconds passed increases by 1
+            timePassed += 1;
+
+            timeLeft = seconds - timePassed;
+
+            // Update label
+            timerLabel.innerHTML = formatTimer(timeLeft);
+
+            // Time is finished
+            if (timeLeft == 0) {
+                timerEnd();
+            }
+
+        }, 1000);
+    }
 }
