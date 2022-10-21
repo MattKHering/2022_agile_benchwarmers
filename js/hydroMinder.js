@@ -32,6 +32,8 @@ const defaultUnits = unitsDropdown[0].value;
 var previousUnits = "";
 var amountDrank = 0;
 var goalAmount = 0;
+var timeInterval = 0;
+var timerIsRunning = false;
 
 // Get the units from the select box
 function getUnits() {
@@ -61,6 +63,23 @@ function getGoalAmount() {
 // Set the goal amount
 function setGoal(amount) {
     goalAmount = amount;
+}
+
+function getTimeInterval() {
+    return timeInterval;
+}
+
+function setTimeInterval(minutes) {
+    // Convert minutes to seconds
+    timeInterval = minutes * 60 / HYPERSPEED_MULTIPLIER;
+}
+
+function getTimerRunning() {
+    return timerIsRunning;
+}
+
+function setTimerRunning(bool) {
+    timerIsRunning = bool;
 }
 
 // Convert the units for the amount drank and goal
@@ -196,101 +215,66 @@ function showAlertBox() {
     document.getElementById("alertBox").style.display = "inline-block";
 }
 
-// onClick listener for the "Add 1 Ounce" Button
-addOneFluidOunce.addEventListener("click", function() {
+const addButtons = document.querySelectorAll('.addButtons');
+var buttonValue = 0;
 
-    // Add the button amount to the total drank amount.
-    amountDrank = amountDrank + 1
+// Function to prevent button spamming
+function disableButtons() {
+    addButtons.forEach((i) => {
+        i.disabled = true;
+    });
+}
 
-    // Hide the alert box
-    hideAlertBox();
+function enableButtons() {
+    addButtons.forEach((i) => {
+        i.disabled = false;
+    });
+}
 
-    // Update the water drank label
-    updateWaterDrank(amountDrank);
+// onClick listener for the oz Buttons
+addButtons.forEach((i) => {
+    i.addEventListener("click", (event) => {
+
+        // Lock the buttons to prevent button spam and breaking timer
+        disableButtons();
+
+        buttonValue = parseInt(event.target.value);
+
+        // Add the button amount to the total drank amount.
+        setWaterDrank(getWaterDrank() + buttonValue);
+
+        // Hide the alert box
+        hideAlertBox();
+
+        // Update the water drank label
+        updateWaterDrank(amountDrank);
+
+        // See if the timer is running
+        if (getTimerRunning()) {
+            setTimeout(() => {
+                // unlock the buttons
+                enableButtons();
+                // Restart the timer
+                restartTimer();
+            }, 500);
+        } else {
+            setTimeout(() => {
+                // unlock the buttons
+                enableButtons();
+                // Initialize, then start, the timer
+                timerInit();
+            }, 500);
+        }
+    });
 });
 
-// onClick listener for the "Add 8 Ounces" Button
-addEightFluidOunce.addEventListener("click", function() {
-
-    // Add the button amount to the total drank amount.
-    amountDrank = amountDrank + 8
-
-    // Hide the alert box
-    hideAlertBox();
-
-    // Update the water drank label
-    updateWaterDrank(amountDrank);
-});
-
-// onClick listener for the "Add 12 Ounces" Button
-addTwelveFluidOunce.addEventListener("click", function() {
-
-    // Add the button amount to the total drank amount.
-    amountDrank = amountDrank + 12
-
-    // Hide the alert box
-    hideAlertBox();
-
-    // Update the water drank label
-    updateWaterDrank(amountDrank);
-});
-
-// onClick listener for the "Add 1 Milliliter" Button
-addOneMilliliter.addEventListener("click", function() {
-
-    // Add the button amount to the total drank amount.
-    amountDrank = amountDrank + 1
-
-    // Hide the alert box
-    hideAlertBox();
-
-    // Update the water drank label
-    updateWaterDrank(amountDrank);
-});
-
-// onClick listener for the "Add 10 Milliliter" Button
-addTenMilliliter.addEventListener("click", function() {
-
-    // Add the button amount to the total drank amount.
-    amountDrank = amountDrank + 10
-
-    // Hide the alert box
-    hideAlertBox();
-
-    // Update the water drank label
-    updateWaterDrank(amountDrank);
-});
-
-// onClick listener for the "Add 100 Milliliter" Button
-addOneHundredMilliliter.addEventListener("click", function() {
-
-    // Add the button amount to the total drank amount.
-    amountDrank = amountDrank + 100
-
-    // Hide the alert box
-    hideAlertBox();
-
-    // Update the water drank label
-    updateWaterDrank(amountDrank);
-});
-
-// onClick listener for the "Add 1000 Milliliter" Button
-addOneThousandMilliliter.addEventListener("click", function() {
-
-    // Add the button amount to the total drank amount.
-    amountDrank = amountDrank + 1000
-    
-    // Hide the alert box
-    hideAlertBox();
-
-    // Update the water drank label
-    updateWaterDrank(amountDrank);
-});
 
 function onload() {
     // Set the water drank label to defaults on page load
     updateWaterDrankDefaults();
 }
+
+var enableSound = document.getElementById('enableSound');
 
 // Alarm function
 function alarm() {
@@ -301,7 +285,7 @@ function alarm() {
 
 // Settings switches logic
 var nightMode = document.getElementById('nightMode');
-var enableSound = document.getElementById('enableSound');
+
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -314,21 +298,14 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('myCSS').href = 'css/style.css';
         }
     });
-
-    enableSound.addEventListener('change', function () {
-        if (enableSound.checked) {
-        } else {
-
-        }
-    });
 });
 
 // Timer interval logic
-const customTimeDiv = document.getElementById('custom-time-div');
 const custom = document.getElementById('custom');
+const customTimeDiv = document.getElementById('custom-time-div');
 const timeInput = document.getElementById('timeInput');
 const timeSelect = document.getElementById('timeSelect');
-const startTimerButton = document.getElementById('startTimerButton');
+const startTimerButton = document.getElementById('startTimer');
 const radioForm = document.getElementById("radio-form");
 var radios = document.getElementsByName("timeRadio");
 var timeInterval = 0;
@@ -352,24 +329,28 @@ radioForm.addEventListener('change', function() {
 
 
 // Start timer button listener
-startTimer.addEventListener('click', function() {
+startTimerButton.addEventListener('click', function() {
+    timerInit();
+});
+
+function timerInit() {
 
     if (custom.checked) {
 
         // Get input time value
         if (!timeInput.value > 0) return window.alert("Please enter a time interval greater than zero.");
-        
-        // Convert minutes to seconds
-        timeInterval = timeInput.value * 60 / HYPERSPEED_MULTIPLIER;
 
         // Get selected time unit
         timeUnit = timeSelect.options[timeSelect.selectedIndex].value;
 
+        // Set timeInverval to the input time (minutes)
+        setTimeInterval(timeInput.value);
+
         // Convert hours to seconds
-        if (timeUnit == "hours") timeInterval *= 3600 / HYPERSPEED_MULTIPLIER;
+        if (timeUnit == "hours") setTimeInterval(getTimeInterval() *= 3600);
 
         // Start the countdown timer
-        beginTimer(timeInterval);
+        startTimer();
         
     } else {
 
@@ -379,18 +360,18 @@ startTimer.addEventListener('click', function() {
             if (radios[i].checked) {
 
                 // Convert into seconds
-                timeInterval = radios[i].value * 60 / HYPERSPEED_MULTIPLIER;
+                setTimeInterval(radios[i].value);
 
                 // Start the countdown timer
-                beginTimer(timeInterval);
+                startTimer();
             }
         }
     }    
-});
+};
 
 // Formats timer label
 function formatTimer(time) {
-    // Time is innput in seconds
+    // Time is input in seconds
 
     // Format hours
     var hours = Math.floor(time / 3600);
@@ -416,29 +397,29 @@ function formatTimer(time) {
 
 var timerInterval = null;
 const timerLabel = document.getElementById("timerLabel");
-var timerIsRunning = false;
 
 // Calls when timer is done
 function timerEnd() {
-    console.log("Timer Ended");
+    // Make sure we know the timer isn't running
     timerIsRunning = false;
-    seconds = 0;
+    setTimeInterval(0);
+    // Stop the timer (in code)
     clearInterval(timerInterval);
     alarm();
     showAlertBox();
 }
 
 // Called when timer should be restarted
-function restartTimer(seconds) {
+function restartTimer() {
     // Make sure we know the timer isn't running
     timerIsRunning = false;
     // Stop the timer (in code)
     clearInterval(timerInterval);
-    beginTimer(seconds)
+    startTimer();
 }
 
 // Begin timer function
-function beginTimer(seconds) {
+function startTimer() {
 
     // Clear time passed value
     var timePassed = 0;
@@ -447,28 +428,30 @@ function beginTimer(seconds) {
     // Make sure alert box is hidden
     hideAlertBox();
 
-    if (timerIsRunning) {
-        restartTimer(seconds);
-    } else {
-
-    
-        timerInterval = setInterval(() => {
-
-            timerIsRunning = true;
-
-            // Seconds passed increases by 1
-            timePassed += 1;
-
-            timeLeft = seconds - timePassed;
-
-            // Update label
-            timerLabel.innerHTML = formatTimer(timeLeft);
-
-            // Time is finished
-            if (timeLeft == 0) {
-                timerEnd();
-            }
-
-        }, 1000);
+    if (getTimerRunning()) {
+        // Stop the timer if it is already running
+        setTimerRunning(false);
+        clearInterval(timerInterval);
     }
+
+    var seconds = getTimeInterval();
+
+    timerInterval = setInterval(() => {
+
+        setTimerRunning(true);
+
+        // Seconds passed increases by 1
+        timePassed += 1;
+
+        timeLeft = seconds - timePassed;
+
+        // Update label
+        timerLabel.innerHTML = formatTimer(timeLeft);
+
+        // Time is finished
+        if (timeLeft == 0) {
+            timerEnd();
+        }
+
+    }, 1000);
 }
