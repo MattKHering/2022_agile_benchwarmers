@@ -11,6 +11,7 @@ const unitsDropdown = document.getElementById("unitsSelect");
 const waterDrankLabel = document.getElementById("waterDrankAmount");
 const setGoalButton = document.getElementById("setGoalButton");
 const setGoalInput = document.getElementById("setGoal");
+const hourlyGoal = document.getElementById("hourlyGoal");
 
 const unitRates = {
     fluidOunces: {
@@ -131,6 +132,10 @@ function updateWaterDrank() {
         // change the label on the page
         waterDrankLabel.innerHTML = amount + " " + unitString + 
         " / " + goal + " " + unitString;
+
+        //Adjust the hourly goal
+        hourlyLogic = goal / 24;
+        hourlyGoal.innerHTML = hourlyLogic.toFixed(2) + " " + unitString;
 
         // Check to see if the goal was met
         checkGoal(amount, goal);
@@ -256,14 +261,14 @@ addButtons.forEach((i) => {
                 enableButtons();
                 // Restart the timer
                 restartTimer();
-            }, 500);
+            }, 2500);
         } else {
             setTimeout(() => {
                 // unlock the buttons
                 enableButtons();
                 // Initialize, then start, the timer
                 timerInit();
-            }, 500);
+            }, 2500);
         }
     });
 });
