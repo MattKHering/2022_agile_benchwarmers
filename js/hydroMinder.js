@@ -1,12 +1,5 @@
 /* jshint curly: true, esversion: 6, eqeqeq: true, latedef: true, laxbreak: true */
 
-//=======================================//
-// Adjust speed of website timer here!   //
-// Value is x times faster than realtime.//
-//====================================== //
-const HYPERSPEED_MULTIPLIER = 10;
-
-
 const unitsDropdown = document.getElementById("unitsSelect");
 const waterDrankLabel = document.getElementById("waterDrankAmount");
 const setGoalButton = document.getElementById("setGoalButton");
@@ -72,7 +65,7 @@ function getTimeInterval() {
 
 function setTimeInterval(minutes) {
     // Convert minutes to seconds
-    timeInterval = minutes * 60 / HYPERSPEED_MULTIPLIER;
+    timeInterval = minutes * 60;
 }
 
 function getTimerRunning() {
@@ -111,8 +104,6 @@ function updateWaterDrank() {
         
     // Test if the input goal amount is excessive (> 800 fl oz)
     // Converts whatever units is entered into fl oz and compares
-    //
-    // Pretty neat!
     if (convertUnits(goal, units, unitsDropdown.options[0].value) > 800) {
 
         window.alert("That is an unrealistic amout of water to drink. Please enter a lower amount.");
@@ -133,13 +124,8 @@ function updateWaterDrank() {
         waterDrankLabel.innerHTML = amount + " " + unitString + 
         " / " + goal + " " + unitString;
 
-      
-
         // Check to see if the goal was met
         checkGoal(amount, goal);
-
-        // Clear the goal textbox
-        // document.getElementById("setGoal").value = "";
 
         // Hide the control box instead of clearing the box
         document.getElementById("goalControl").style.display = "none";
