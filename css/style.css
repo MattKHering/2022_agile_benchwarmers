@@ -128,6 +128,49 @@ input:checked + .slider::before {
   border-radius: 50%;
 }
 
+
+/* Adding text in the toggle button */
+.switch .labels {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+    font-family: sans-serif;
+    transition: all 0.4s ease-in-out;
+}
+
+.switch .labels::after {
+    content: attr(data-off);
+    position: absolute;
+    right: 5px;
+    color: #4d4d4d;
+    opacity: 1;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s ease-in-out;
+    font-weight: bold;
+}
+
+.switch .labels::before {
+    content: attr(data-on);
+    position: absolute;
+    left: 5px;
+    color: #4d4d4d;
+    opacity: 0;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
+    transition: all 0.4s ease-in-out;
+    font-weight: bold;
+}
+
+.switch input:checked~.labels::after {
+    opacity: 0;
+}
+
+.switch input:checked~.labels::before {
+    opacity: 1;
+}
+
 /* Time radio buttons */
 #custom-time-div {
   display: none;
