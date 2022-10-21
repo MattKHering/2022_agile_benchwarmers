@@ -133,9 +133,7 @@ function updateWaterDrank() {
         waterDrankLabel.innerHTML = amount + " " + unitString + 
         " / " + goal + " " + unitString;
 
-        //Adjust the hourly goal
-        hourlyLogic = goal / 24;
-        hourlyGoal.innerHTML = hourlyLogic.toFixed(2) + " " + unitString;
+      
 
         // Check to see if the goal was met
         checkGoal(amount, goal);
@@ -155,6 +153,10 @@ function updateWaterDrank() {
         } else if (unitsDropdown.options.selectedIndex == 1) {
             document.getElementById("milliliter-add").style.display = "inline-block";
         }
+
+         //Adjust the hourly goal
+        hourlyLogic = goal / 24;
+        hourlyGoal.innerHTML = hourlyLogic.toFixed(2) + " " + unitString;
     }
     progress();
 }
