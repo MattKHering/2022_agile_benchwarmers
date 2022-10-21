@@ -146,9 +146,9 @@ function updateWaterDrank() {
 
         //Show the input buttons depending on which unit is slected
         if ((unitsDropdown.options.selectedIndex) == 0) {
-            document.getElementById("ounce-add").style.display = "inline-block";
+            document.getElementById("ounceAdd").style.display = "inline-block";
         } else if (unitsDropdown.options.selectedIndex == 1) {
-            document.getElementById("milliliter-add").style.display = "inline-block";
+            document.getElementById("milliliterAdd").style.display = "inline-block";
         }
     }
     progress();
