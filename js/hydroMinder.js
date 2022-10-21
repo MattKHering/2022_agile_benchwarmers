@@ -146,9 +146,9 @@ function updateWaterDrank() {
 
         //Show the input buttons depending on which unit is slected
         if ((unitsDropdown.options.selectedIndex) == 0) {
-            document.getElementById("ounceAdd").style.display = "inline-block";
+            document.getElementById("ounce-add").style.display = "inline-block";
         } else if (unitsDropdown.options.selectedIndex == 1) {
-            document.getElementById("milliliterAdd").style.display = "inline-block";
+            document.getElementById("milliliter-add").style.display = "inline-block";
         }
     }
     progress();
@@ -208,11 +208,11 @@ setGoalButton.addEventListener("click", function() {
 });
 
 function hideAlertBox() {
-    document.getElementById("alertBox").style.display = "none";
+    document.getElementById("alert-box").style.display = "none";
 }
 
 function showAlertBox() {
-    document.getElementById("alertBox").style.display = "inline-block";
+    document.getElementById("alert-box").style.display = "inline-block";
 }
 
 const addButtons = document.querySelectorAll('.addButtons');
