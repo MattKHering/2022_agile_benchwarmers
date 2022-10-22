@@ -340,7 +340,7 @@ function timerInit() {
         setTimeInterval(timeInput.value);
 
         // Convert hours to seconds
-        if (timeUnit == "hours") setTimeInterval(getTimeInterval() *= 3600);
+        if (timeUnit == "hours") setTimeInterval(getTimeInterval());
 
         // Start the countdown timer
         startTimer();
